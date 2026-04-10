@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chú Tâm • Đưa đón và tham quan</title>
+  <style>
+    :root {
+      --bg: #a9d7ee;
+      --bg-soft: #8fc6e2;
+      --bg-deep: #78b6d8;
+      --card: rgba(243, 251, 255, 0.88);
+      --card-solid: #eef9ff;
+      --text: #133247;
+      --muted: #4c6b7f;
+      --primary: #1d8fd8;
+      --primary-hover: #127cc0;
+      --secondary-btn: rgba(21, 39, 62, 0.10);
+      --accent: #ffd36e;
+      --accent-soft: rgba(255, 211, 110, 0.24);
+      --border: rgba(70, 137, 175, 0.22);
+      --shadow: 0 18px 40px rgba(18, 64, 96, 0.16);
+      --shadow-soft: 0 10px 24px rgba(18, 64, 96, 0.10);
+      --hero-glow: rgba(255, 211, 110, 0.20);
+      --hero-glow-2: rgba(17, 123, 186, 0.18);
+      --overlay: rgba(7, 12, 18, 0.78);
+      --facebook: #1877f2;
+      --zalo: #0068ff;
+    }
+
+    body.dark {
+      --bg: #0f1722;
+      --bg-soft: #131e2c;
+      --bg-deep: #162130;
+      --card: rgba(22, 33, 48, 0.90);
+      --card-solid: #162130;
+      --text: #eef6ff;
+      --muted: #a9bfd1;
+      --primary: #5ab0ff;
+      --primary-hover: #7fc1ff;
+      --secondary-btn: rgba(8, 14, 22, 0.30);
+      --accent: #ffd166;
+      --accent-soft: rgba(255, 209, 102, 0.13);
+      --border: rgba(122, 154, 184, 0.18);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.30);
+      --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.22);
+      --hero-glow: rgba(255, 209, 102, 0.10);
+      --hero-glow-2: rgba(90, 176, 255, 0.08);
+      --overlay: rgba(7, 12, 18, 0.82);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, var(--hero-glow), transparent 18%),
+        radial-gradient(circle at top right, var(--hero-glow-2), transparent 22%),
+        linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 52%, var(--bg-deep) 100%);
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    body.dark {
+      background:
+        radial-gradient(circle at top left, var(--hero-glow), transparent 22%),
+        radial-gradient(circle at top right, var(--hero-glow-2), transparent 24%),
+        linear-gradient(180deg, #101825 0%, var(--bg-soft) 40%, var(--bg) 100%);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 0 8px;
+    }
+
+    .brand {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--text);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(360px, 0.95fr) minmax(320px, 1.05fr);
+      gap: 26px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-image {
+      aspect-ratio: 4 / 5;
+      min-height: 520px;
+      max-height: 700px;
+      border-radius: 26px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, rgba(21, 144, 216, 0.12), rgba(255, 211, 110, 0.14)),
+        var(--card-solid);
+      box-shadow: var(--shadow);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .hero-copy {
+      padding: 8px 6px 8px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 14px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(29, 143, 216, 0.12);
+      color: var(--primary);
+      font-size: 0.94rem;
+      font-weight: 800;
+      border: 1px solid rgba(29, 143, 216, 0.10);
+    }
+
+    h1, h2, h3, .brand, .btn, .eyebrow {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+h1 {
+  margin: 0 0 18px;
+font-size: clamp(1.68rem, 2.9vw, 2.85rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  max-width: 520px;
+}
+
+    .title-line {
+      display: block;
+    }
+
+    .title-line + .title-line {
+      margin-top: 0;
+    }
+
+    .lead,
+    .desc,
+    .card p,
+    .info-item,
+    .lightbox-caption-text,
+    .floating-popup-text,
+    .album-tip {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+.lead {
+  margin: 0;
+  font-size: 1.08rem;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.72;
+}
+
+    .hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .hero-note {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 211, 110, 0.18);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.93rem;
+      font-weight: 700;
+    }
+
+    .cta-row,
+    .social-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .cta-row {
+      margin-top: 26px;
+    }
+
+    .social-row {
+      margin-top: 14px;
+    }
+
+    .btn,
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 13px 18px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover,
+    .social-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-inner,
+    .social-link-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      display: inline-block;
+    }
+
+    .icon-facebook {
+      color: var(--facebook);
+    }
+
+    .icon-zalo {
+      color: var(--zalo);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: var(--secondary-btn);
+      color: var(--text);
+      border-color: var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link {
+      background: var(--card);
+      color: var(--text);
+      border-color: var(--border);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .section {
+      margin-top: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .section h2 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+
+    .section p.desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(0,0,0,0.02));
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.06rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .info-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .info-item {
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.015));
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .gallery-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .gallery-note {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .carousel-wrap {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(220px, 260px);
+      gap: 14px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+      scrollbar-width: none;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      background: var(--card-solid);
+      aspect-ratio: 4 / 5;
+      padding: 0;
+      appearance: none;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.28s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.04);
+    }
+
+    .gallery-item span {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(10, 18, 28, 0.45);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      justify-content: flex-end;
+    }
+
+    .carousel-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1.15rem;
+      font-weight: 900;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .album-tip {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 32px 20px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: var(--overlay);
+      z-index: 999;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      width: min(960px, 100%);
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .lightbox-image-wrap {
+      background: #0c1219;
+    }
+
+    .lightbox-image {
+      width: 100%;
+      max-height: 72vh;
+      object-fit: contain;
+      background: #0c1219;
+    }
+
+    .lightbox-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: var(--text);
+      background: var(--card-solid);
+    }
+
+    .lightbox-caption-text {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .lightbox-close {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .floating-popup {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1000;
+      width: min(320px, calc(100vw - 28px));
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: translateY(0);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .floating-popup.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px);
+    }
+
+    .floating-popup-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px 0;
+    }
+
+    .floating-popup-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255, 211, 110, 0.16);
+      flex: 0 0 auto;
+    }
+
+    .floating-popup-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .floating-popup-body {
+      padding: 6px 14px 14px;
+    }
+
+    .floating-popup-title {
+      margin: 0 0 6px;
+      font-size: 1rem;
+      font-weight: 800;
+    }
+
+    .floating-popup-text {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .floating-popup-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .floating-mini-btn {
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 800;
+      color: var(--text);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .floating-mini-btn.primary {
+      background: var(--primary);
+      color: white;
+      border-color: transparent;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        min-height: 340px;
+        aspect-ratio: 4 / 4.5;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero,
+      .section {
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .cta-row,
+      .social-row {
+        flex-direction: column;
+      }
+
+      .btn,
+      .social-link {
+        width: 100%;
+      }
+
+      .carousel-track {
+        grid-auto-columns: minmax(180px, 78vw);
+      }
+
+      .floating-popup {
+        right: 12px;
+        bottom: 12px;
+        width: min(300px, calc(100vw - 24px));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">Chú Tâm • Đưa đón và tham quan</div>
+      <button class="theme-toggle" id="themeToggle" type="button">Đổi giao diện</button>
+    </div>
+
+    <section class="hero">
+      <div class="hero-image">
+        <img src="tam-xe-du-lich.jpg" alt="Chú Tâm và xe du lịch" />
+      </div>
+
+      <div class="hero-copy">
+        <div class="eyebrow">Đưa đón thân thiện • Tham quan thoải mái</div>
+
+        <h1>
+          <span class="title-line">Đi dễ chịu hơn khi</span>
+          <span class="title-line">có chú Tâm đồng hành</span>
+        </h1>
+
+        <p class="lead">
+          Dịch vụ xe du lịch dành cho gia đình và nhóm nhỏ. Phù hợp với khách muốn đi riêng,
+          thoải mái và nhẹ nhàng hơn so với những tour đông người.
+        </p>
+
+        <div class="hero-notes">
+          <div class="hero-note">Phù hợp gia đình có trẻ nhỏ</div>
+          <div class="hero-note">Đi riêng tư, không gò bó</div>
+          <div class="hero-note">Hỗ trợ khách mới dễ hơn</div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:0392125561" aria-label="Gọi chú Tâm">
+            <span class="btn-inner">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6.6 10.8C8.3 14.1 9.9 15.7 13.2 17.4L15.4 15.2C15.7 14.9 16.1 14.8 16.5 14.9C17.7 15.3 19 15.5 20.3 15.5C20.9 15.5 21.4 16 21.4 16.6V20.1C21.4 20.7 20.9 21.2 20.3 21.2C10.6 21.2 2.8 13.4 2.8 3.7C2.8 3.1 3.3 2.6 3.9 2.6H7.4C8 2.6 8.5 3.1 8.5 3.7C8.5 5 8.7 6.3 9.1 7.5C9.2 7.9 9.1 8.3 8.8 8.6L6.6 10.8Z" fill="currentColor"/>
+              </svg>
+              <span>Gọi chú Tâm</span>
+            </span>
+          </a>
+
+          <a class="btn btn-secondary" href="https://zalo.me/0392125561" target="_blank" rel="noopener noreferrer" aria-label="Nhắn Zalo nhanh cho chú Tâm">
+            <span class="btn-inner">
+              <svg class="icon icon-zalo" viewBox="0 0 64 64" aria-hidden="true">
+                <rect x="6" y="10" width="52" height="44" rx="14" fill="currentColor" opacity="0.18"></rect>
+                <path d="M22 22H42L25 42H42" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Nhắn Zalo nhanh</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="social-row">
+          <a class="social-link" href="https://www.facebook.com/tam.phamchi.16940" target="_blank" rel="noopener noreferrer" aria-label="Xem Facebook của chú Tâm">
+            <span class="social-link-inner">
+              <svg class="icon icon-facebook" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M13.2 21V12.8H15.9L16.3 9.6H13.2V7.6C13.2 6.7 13.4 6 14.8 6H16.4V3.1C15.6 3 14.8 3 14 3C11.5 3 9.8 4.5 9.8 7.3V9.6H7.2V12.8H9.8V21H13.2Z" fill="currentColor"/>
+              </svg>
+              <span>Facebook của chú Tâm</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Dịch vụ chính</h2>
+      <p class="desc">
+        Đi theo kiểu gọn gàng, thân thiện và thoải mái. Hợp với khách muốn chủ động thời gian hơn.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Đưa đón tiện lợi</h3>
+          <p>Phù hợp cho gia đình, nhóm bạn nhỏ hoặc khách muốn di chuyển nhẹ nhàng và nhanh gọn.</p>
+        </div>
+
+        <div class="card">
+          <h3>Chở khách tham quan</h3>
+          <p>Đi các điểm đẹp với lịch trình thoải mái, không quá gấp gáp và dễ sắp xếp hơn.</p>
+        </div>
+
+        <div class="card">
+          <h3>Hỗ trợ khách mới</h3>
+          <p>Nếu lần đầu tới đây, chú Tâm có thể gợi ý lịch đi sao cho hợp thời gian và dễ chịu hơn.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Vì sao nhiều khách thích đi cùng chú Tâm</h2>
+      <div class="info-list">
+        <div class="info-item">
+          <strong>Thân thiện, dễ trao đổi</strong>
+          Khách đi cùng người lớn tuổi hay trẻ nhỏ đều dễ sắp xếp hơn, không bị quá vội.
+        </div>
+
+        <div class="info-item">
+          <strong>Đi riêng tư, thoải mái</strong>
+          Không bị cảm giác gò bó như đi tour đông người, phù hợp với gia đình hoặc nhóm nhỏ.
+        </div>
+
+        <div class="info-item">
+          <strong>Làm theo kiểu rõ ràng, an tâm</strong>
+          Ưu tiên đúng giờ, dễ liên hệ và hỗ trợ khách theo cách nhẹ nhàng, thật thà.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="gallery-header">
+        <div>
+          <h2>Album kỷ niệm</h2>
+          <p class="desc">
+            Một vài khoảnh khắc vui vẻ cùng khách trong những chuyến đi đáng nhớ.
+          </p>
+        </div>
+        <div class="gallery-note">Bấm vào ảnh để xem lớn hơn • Bấm nút để cuộn tiếp</div>
+      </div>
+
+      <div class="carousel-wrap">
+        <div class="carousel-track" id="albumTrack">
+          <button class="gallery-item" type="button" data-image="images/album-1.jpg" data-caption="Kỷ niệm cùng khách trong một chuyến đi vui vẻ">
+            <img src="images/album-1.jpg" alt="Kỷ niệm cùng khách 1" />
+            <span>Kỷ niệm 1</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-image="images/album-2.jpg" data-caption="Một khoảnh khắc đáng nhớ cùng gia đình khách">
+            <img src="images/album-2.jpg" alt="Kỷ niệm cùng khách 2" />
+            <span>Kỷ niệm 2</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-image="images/album-3.jpg" data-caption="Chuyến đi nhẹ nhàng, thoải mái và nhiều tiếng cười">
+            <img src="images/album-3.jpg" alt="Kỷ niệm cùng khách 3" />
+            <span>Kỷ niệm 3</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-image="images/album-4.jpg" data-caption="Một ngày đẹp trời cùng những vị khách dễ thương">
+            <img src="images/album-4.jpg" alt="Kỷ niệm cùng khách 4" />
+            <span>Kỷ niệm 4</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-image="images/album-5.jpg" data-caption="Một chuyến đi khác với nhiều khoảnh khắc đáng nhớ">
+            <img src="images/album-5.jpg" alt="Kỷ niệm cùng khách 5" />
+            <span>Kỷ niệm 5</span>
+          </button>
+
+          <button class="gallery-item" type="button" data-image="images/album-6.jpg" data-caption="Niềm vui nhỏ nhưng rất đáng nhớ trong hành trình">
+            <img src="images/album-6.jpg" alt="Kỷ niệm cùng khách 6" />
+            <span>Kỷ niệm 6</span>
+          </button>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="albumPrev" type="button" aria-label="Xem ảnh trước">‹</button>
+          <button class="carousel-btn" id="albumNext" type="button" aria-label="Xem ảnh tiếp">›</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="section">
+      <h2>Liên hệ</h2>
+      <div class="info-list">
+        <div class="info-item">
+          <strong>Chú Tâm</strong>
+          Điện thoại: 0392125561
+        </div>
+
+        <div class="info-item">
+          <strong>Zalo</strong>
+          Nhắn trực tiếp để hỏi lịch đi và giá trước cho tiện: 0392125561
+        </div>
+
+        <div class="info-item">
+          <strong>Facebook</strong>
+          Có thể xem thêm hình ảnh và liên hệ qua Facebook của chú Tâm
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    Chú Tâm • Đưa đón và tham quan • Thân thiện • Gọn gàng • Dễ liên hệ
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-inner">
+      <div class="lightbox-image-wrap">
+        <img class="lightbox-image" id="lightboxImage" src="" alt="Ảnh kỷ niệm" />
+      </div>
+      <div class="lightbox-caption">
+        <div class="lightbox-caption-text" id="lightboxCaption"></div>
+        <button class="lightbox-close" id="lightboxClose" type="button">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="floating-popup" id="floatingPopup">
+    <div class="floating-popup-head">
+      <div class="floating-popup-dot"></div>
+      <button class="floating-popup-close" id="popupClose" type="button" aria-label="Đóng popup">×</button>
+    </div>
+
+    <div class="floating-popup-body">
+      <p class="floating-popup-title">Cần hỏi lịch đi hay giá trước?</p>
+      <p class="floating-popup-text">
+        Có thể gọi, nhắn Zalo hoặc xem Facebook của chú Tâm để hỏi nhanh cho tiện.
+      </p>
+
+      <div class="floating-popup-actions">
+        <a class="floating-mini-btn primary" href="tel:0392125561">Gọi ngay</a>
+        <a class="floating-mini-btn" href="https://zalo.me/0392125561" target="_blank" rel="noopener noreferrer">Nhắn Zalo</a>
+        <a class="floating-mini-btn" href="https://www.facebook.com/tam.phamchi.16940" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem("theme");
+      const hour = new Date().getHours();
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const themeToggleBtn = document.getElementById("themeToggle");
+
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.body.classList.add("dark");
+          themeToggleBtn.textContent = "Chuyển sang nền sáng";
+        } else {
+          document.body.classList.remove("dark");
+          themeToggleBtn.textContent = "Chuyển sang nền tối";
+        }
+      }
+
+      let initialTheme = "light";
+
+      if (savedTheme) {
+        initialTheme = savedTheme;
+      } else if (prefersDark) {
+        initialTheme = "dark";
+      } else {
+        initialTheme = (hour >= 18 || hour < 6) ? "dark" : "light";
+      }
+
+      applyTheme(initialTheme);
+
+      themeToggleBtn.addEventListener("click", function () {
+        const isDark = document.body.classList.contains("dark");
+        const nextTheme = isDark ? "light" : "dark";
+        applyTheme(nextTheme);
+        localStorage.setItem("theme", nextTheme);
+      });
+
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+
+      function openLightbox(imageSrc, captionText) {
+        lightboxImage.src = imageSrc;
+        lightboxCaption.textContent = captionText || "";
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        lightboxImage.src = "";
+        document.body.style.overflow = "";
+      }
+
+      galleryItems.forEach(function (item) {
+        item.addEventListener("click", function () {
+          const imageSrc = item.getAttribute("data-image");
+          const captionText = item.getAttribute("data-caption");
+          openLightbox(imageSrc, captionText);
+        });
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("open")) {
+          closeLightbox();
+        }
+      });
+
+      const albumTrack = document.getElementById("albumTrack");
+      const albumPrev = document.getElementById("albumPrev");
+      const albumNext = document.getElementById("albumNext");
+
+      function getScrollAmount() {
+        return Math.min(albumTrack.clientWidth * 0.9, 820);
+      }
+
+      albumPrev.addEventListener("click", function () {
+        albumTrack.scrollBy({
+          left: -getScrollAmount(),
+          behavior: "smooth"
+        });
+      });
+
+      albumNext.addEventListener("click", function () {
+        albumTrack.scrollBy({
+          left: getScrollAmount(),
+          behavior: "smooth"
+        });
+      });
+
+      const floatingPopup = document.getElementById("floatingPopup");
+      const popupClose = document.getElementById("popupClose");
+
+      popupClose.addEventListener("click", function () {
+        floatingPopup.classList.add("hidden");
+        localStorage.setItem("hideFloatingPopup", "1");
+      });
+
+      if (localStorage.getItem("hideFloatingPopup") === "1") {
+        floatingPopup.classList.add("hidden");
+      }
+    })();
+  </script>
+</body>
+</html>
