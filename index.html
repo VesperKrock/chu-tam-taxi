@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chú Tâm • Đưa đón và tham quan</title>
+  <title>Chú Tâm • Đưa đón và tham quan riêng</title>
   <style>
     :root {
       --bg: #a9d7ee;
@@ -26,6 +26,8 @@
       --overlay: rgba(7, 12, 18, 0.78);
       --facebook: #1877f2;
       --zalo: #0068ff;
+      --section-mark: #0d6ea8;
+      --section-mark-bg: rgba(13, 110, 168, 0.10);
     }
 
     body.dark {
@@ -47,15 +49,12 @@
       --hero-glow: rgba(255, 209, 102, 0.10);
       --hero-glow-2: rgba(90, 176, 255, 0.08);
       --overlay: rgba(7, 12, 18, 0.82);
+      --section-mark: #89d0ff;
+      --section-mark-bg: rgba(137, 208, 255, 0.10);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -76,40 +75,20 @@
         linear-gradient(180deg, #101825 0%, var(--bg-soft) 40%, var(--bg) 100%);
     }
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+    img { max-width: 100%; display: block; }
+    button, a { font: inherit; }
 
-    button,
-    a {
-      font: inherit;
-    }
-
-    .container {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+    .container { max-width: 1140px; margin: 0 auto; padding: 20px; }
 
     .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      padding: 18px 0 8px;
+      display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 18px 0 8px;
     }
 
-    .brand {
-      font-size: 1.08rem;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      color: var(--text);
-    }
+    .brand { font-size: 1.08rem; font-weight: 800; letter-spacing: 0.2px; color: var(--text); }
 
     .theme-toggle {
       border: 1px solid var(--border);
-      background: var(--card);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.10));
       color: var(--text);
       padding: 10px 16px;
       border-radius: 999px;
@@ -120,9 +99,7 @@
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-    }
+    .theme-toggle:hover { transform: translateY(-1px); }
 
     .hero {
       display: grid;
@@ -133,9 +110,21 @@
       padding: 20px;
       border-radius: 30px;
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.14);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08)), rgba(255, 255, 255, 0.10);
       backdrop-filter: blur(14px);
       box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 211, 110, 0.28), transparent 70%);
+      pointer-events: none;
     }
 
     .hero-image {
@@ -145,9 +134,7 @@
       border-radius: 26px;
       overflow: hidden;
       border: 1px solid var(--border);
-      background:
-        linear-gradient(135deg, rgba(21, 144, 216, 0.12), rgba(255, 211, 110, 0.14)),
-        var(--card-solid);
+      background: linear-gradient(135deg, rgba(21, 144, 216, 0.12), rgba(255, 211, 110, 0.14)), var(--card-solid);
       box-shadow: var(--shadow);
       position: relative;
       display: flex;
@@ -156,26 +143,14 @@
     }
 
     .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
+      width: 100%; height: 100%; object-fit: cover; object-position: center center;
     }
 
-    .hero-copy {
-      padding: 8px 6px 8px 0;
-    }
+    .hero-copy { padding: 8px 6px 8px 0; position: relative; z-index: 1; }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 14px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(29, 143, 216, 0.12);
-      color: var(--primary);
-      font-size: 0.94rem;
-      font-weight: 800;
+      display: inline-flex; align-items: center; margin-bottom: 14px; padding: 8px 14px; border-radius: 999px;
+      background: rgba(29, 143, 216, 0.12); color: var(--primary); font-size: 0.94rem; font-weight: 800;
       border: 1px solid rgba(29, 143, 216, 0.10);
     }
 
@@ -189,562 +164,257 @@
       line-height: 1.1;
       letter-spacing: -0.025em;
       font-weight: 800;
-      max-width: 520px;
+      max-width: 560px;
     }
 
-    .title-line {
-      display: block;
-    }
+    .title-line { display: block; }
+    .title-line + .title-line { margin-top: 0; }
 
-    .title-line + .title-line {
-      margin-top: 0;
-    }
-
-    .lead,
-    .desc,
-    .card p,
-    .info-item,
-    .lightbox-caption-text,
-    .floating-popup-text,
-    .album-tip {
-      text-align: justify;
-      text-justify: inter-word;
+    .lead, .desc, .card p, .info-item, .lightbox-caption-text, .floating-popup-text, .album-tip {
+      text-align: justify; text-justify: inter-word;
     }
 
     .lead {
-      margin: 0;
-      font-size: 1.08rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.72;
+      margin: 0; font-size: 1.08rem; color: var(--muted); max-width: 540px; line-height: 1.72;
     }
 
-    .hero-notes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
+    .hero-notes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 
     .hero-note {
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(255, 211, 110, 0.18);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 0.93rem;
-      font-weight: 700;
+      padding: 9px 12px; border-radius: 999px; background: rgba(255, 211, 110, 0.18); border: 1px solid var(--border);
+      color: var(--text); font-size: 0.93rem; font-weight: 700; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
 
-    .cta-row,
-    .social-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .cta-row, .social-row { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cta-row { margin-top: 26px; }
+    .social-row { margin-top: 14px; }
+
+    .btn, .social-link {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 13px 18px;
+      border-radius: 16px; text-decoration: none; font-weight: 800; border: 1px solid transparent;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .cta-row {
-      margin-top: 26px;
-    }
-
-    .social-row {
-      margin-top: 14px;
-    }
-
-    .btn,
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 50px;
-      padding: 13px 18px;
-      border-radius: 16px;
-      text-decoration: none;
-      font-weight: 800;
-      border: 1px solid transparent;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .btn:hover,
-    .social-link:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-inner,
-    .social-link-inner {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      flex: 0 0 auto;
-      display: inline-block;
-    }
-
-    .icon-facebook {
-      color: var(--facebook);
-    }
-
-    .icon-zalo {
-      color: var(--zalo);
-    }
+    .btn:hover, .social-link:hover { transform: translateY(-1px); }
+    .btn-inner, .social-link-inner { display: inline-flex; align-items: center; gap: 10px; }
+    .icon { width: 20px; height: 20px; flex: 0 0 auto; display: inline-block; }
+    .icon-facebook { color: var(--facebook); }
+    .icon-zalo { color: var(--zalo); }
 
     .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: var(--shadow-soft);
+      background: linear-gradient(180deg, #2aa3eb, var(--primary)); color: white; box-shadow: var(--shadow-soft);
     }
 
     .btn-primary:hover {
-      background: var(--primary-hover);
+      background: linear-gradient(180deg, #36a9ee, var(--primary-hover)); box-shadow: var(--shadow);
     }
 
     .btn-secondary {
-      background: var(--secondary-btn);
-      color: var(--text);
-      border-color: var(--border);
-      backdrop-filter: blur(10px);
+      background: var(--secondary-btn); color: var(--text); border-color: var(--border); backdrop-filter: blur(10px);
     }
 
     .social-link {
-      background: var(--card);
-      color: var(--text);
-      border-color: var(--border);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.10));
+      color: var(--text); border-color: var(--border); box-shadow: var(--shadow-soft); backdrop-filter: blur(10px);
     }
 
     .section {
       margin-top: 22px;
-      background: var(--card);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08)), var(--card);
       border: 1px solid var(--border);
       border-radius: 26px;
       padding: 28px;
       box-shadow: var(--shadow-soft);
       backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
     }
 
-    .section h2 {
-      margin: 0 0 10px;
-      font-size: 1.55rem;
-      line-height: 1.2;
+    .section::before {
+      content: ""; position: absolute; left: 28px; top: 0; width: 76px; height: 4px; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
     }
 
-    .section p.desc {
-      margin: 0 0 18px;
-      color: var(--muted);
+    .section-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+
+    .section-mark {
+      display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 44px; padding: 0 12px;
+      border-radius: 999px; background: var(--section-mark-bg); color: var(--section-mark); border: 1px solid var(--border);
+      font-size: 0.9rem; font-weight: 900; letter-spacing: 0.08em; box-shadow: var(--shadow-soft);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
+    .section h2 { margin: 0; font-size: 1.55rem; line-height: 1.2; }
+    .section p.desc { margin: 0 0 18px; color: var(--muted); max-width: 760px; }
+
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
     .card {
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(0,0,0,0.02));
+      padding: 18px; border-radius: 20px; border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
     }
 
-    .card h3 {
-      margin: 0 0 8px;
-      font-size: 1.06rem;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.98rem;
-    }
-
-    .info-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 8px;
-    }
+    .card h3 { margin: 0 0 8px; font-size: 1.06rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+    .info-list { display: grid; gap: 12px; margin-top: 8px; }
 
     .info-item {
-      padding: 15px 16px;
-      border: 1px solid var(--border);
-      border-radius: 17px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.015));
+      padding: 15px 16px; border: 1px solid var(--border); border-radius: 17px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(0,0,0,0.015)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     }
 
-    .info-item strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 1rem;
-      text-align: left;
-    }
+    .info-item strong { display: block; margin-bottom: 4px; font-size: 1rem; text-align: left; }
 
     .gallery-header {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
+      display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 16px;
     }
 
-    .gallery-note {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .carousel-wrap {
-      position: relative;
-    }
+    .gallery-note { color: var(--muted); font-size: 0.96rem; }
+    .carousel-wrap { position: relative; }
 
     .carousel-track {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: minmax(220px, 260px);
-      gap: 14px;
-      overflow-x: auto;
-      scroll-behavior: smooth;
-      padding-bottom: 8px;
-      scrollbar-width: none;
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 260px); gap: 14px; overflow-x: auto;
+      scroll-behavior: smooth; padding-bottom: 8px; scrollbar-width: none;
     }
 
-    .carousel-track::-webkit-scrollbar {
-      display: none;
-    }
+    .carousel-track::-webkit-scrollbar { display: none; }
 
     .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      cursor: pointer;
-      background: var(--card-solid);
-      aspect-ratio: 4 / 5;
-      padding: 0;
-      appearance: none;
+      position: relative; overflow: hidden; border-radius: 20px; border: 1px solid var(--border); box-shadow: var(--shadow-soft);
+      cursor: pointer; background: var(--card-solid); aspect-ratio: 4 / 5; padding: 0; appearance: none;
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.28s ease;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.04);
-    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.28s ease; }
+    .gallery-item:hover img { transform: scale(1.04); }
 
     .gallery-item span {
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      padding: 8px 10px;
-      border-radius: 12px;
-      background: rgba(10, 18, 28, 0.45);
-      color: #fff;
-      font-size: 0.9rem;
-      font-weight: 700;
-      backdrop-filter: blur(8px);
+      position: absolute; left: 12px; right: 12px; bottom: 12px; padding: 8px 10px; border-radius: 12px;
+      background: rgba(10, 18, 28, 0.45); color: #fff; font-size: 0.9rem; font-weight: 700; backdrop-filter: blur(8px);
     }
 
-    .car-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
+    .car-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
     .car-photo-card {
-      padding: 0;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--card-solid);
-      box-shadow: var(--shadow-soft);
-      cursor: pointer;
-      overflow: hidden;
-      appearance: none;
-      color: inherit;
-      text-align: left;
+      padding: 0; border: 1px solid var(--border); border-radius: 20px; background: var(--card-solid); box-shadow: var(--shadow-soft);
+      cursor: pointer; overflow: hidden; appearance: none; color: inherit; text-align: left;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
-    .car-photo-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    .car-photo-card img {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-    }
+    .car-photo-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .car-photo-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
     .car-photo-caption {
-      padding: 12px 14px;
-      font-size: 0.96rem;
-      font-weight: 700;
-      color: var(--text);
-      background: var(--card-solid);
+      padding: 12px 14px; font-size: 0.96rem; font-weight: 700; color: var(--text); background: var(--card-solid);
     }
 
-    .carousel-controls {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-      justify-content: flex-end;
-    }
+    .carousel-controls { display: flex; gap: 10px; margin-top: 16px; justify-content: flex-end; }
 
     .carousel-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 1.15rem;
-      font-weight: 900;
-      box-shadow: var(--shadow-soft);
+      width: 46px; height: 46px; border-radius: 999px; border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.10));
+      color: var(--text); cursor: pointer; font-size: 1.15rem; font-weight: 900; box-shadow: var(--shadow-soft);
     }
 
     .album-tip {
-      margin-top: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: var(--accent-soft);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 0.95rem;
+      margin-top: 16px; padding: 14px 16px; border-radius: 16px; background: var(--accent-soft); border: 1px solid var(--border);
+      color: var(--text); font-size: 0.95rem;
     }
 
-    footer {
-      padding: 32px 20px 40px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
+    footer { padding: 32px 20px 40px; text-align: center; color: var(--muted); font-size: 0.96rem; }
 
     .lightbox {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      background: var(--overlay);
-      z-index: 999;
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 22px;
+      background: var(--overlay); z-index: 999;
     }
 
-    .lightbox.open {
-      display: flex;
-    }
+    .lightbox.open { display: flex; }
 
     .lightbox-inner {
-      width: min(960px, 100%);
-      background: var(--card-solid);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
+      width: min(960px, 100%); background: var(--card-solid); border: 1px solid var(--border);
+      border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);
     }
 
-    .lightbox-image-wrap {
-      background: #0c1219;
-    }
-
-    .lightbox-image {
-      width: 100%;
-      max-height: 72vh;
-      object-fit: contain;
-      background: #0c1219;
-    }
+    .lightbox-image-wrap { background: #0c1219; }
+    .lightbox-image { width: 100%; max-height: 72vh; object-fit: contain; background: #0c1219; }
 
     .lightbox-caption {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      color: var(--text);
-      background: var(--card-solid);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px;
+      color: var(--text); background: var(--card-solid);
     }
 
-    .lightbox-caption-text {
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
+    .lightbox-caption-text { color: var(--muted); font-size: 0.96rem; }
 
     .lightbox-close {
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 700;
+      border: 1px solid var(--border); background: var(--card); color: var(--text); padding: 10px 14px;
+      border-radius: 999px; cursor: pointer; font-weight: 700;
     }
 
     .floating-popup {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 1000;
-      width: min(320px, calc(100vw - 28px));
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      transform: translateY(0);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      position: fixed; right: 18px; bottom: 18px; z-index: 1000; width: min(320px, calc(100vw - 28px));
+      border-radius: 24px; border: 1px solid var(--border); background: var(--card); backdrop-filter: blur(12px);
+      box-shadow: var(--shadow); overflow: hidden; transform: translateY(0); transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
-    .floating-popup.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(16px);
-    }
+    .floating-popup.hidden { opacity: 0; pointer-events: none; transform: translateY(16px); }
 
     .floating-popup-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 14px 0;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px 0;
     }
 
     .floating-popup-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(255, 211, 110, 0.16);
-      flex: 0 0 auto;
+      width: 12px; height: 12px; border-radius: 999px; background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(255, 211, 110, 0.16); flex: 0 0 auto;
     }
 
     .floating-popup-close {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1;
+      width: 32px; height: 32px; border-radius: 999px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted); cursor: pointer; font-size: 1rem; font-weight: 800; line-height: 1;
     }
 
-    .floating-popup-body {
-      padding: 6px 14px 14px;
-    }
-
-    .floating-popup-title {
-      margin: 0 0 6px;
-      font-size: 1rem;
-      font-weight: 800;
-    }
-
-    .floating-popup-text {
-      margin: 0 0 12px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .floating-popup-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .floating-popup-body { padding: 6px 14px 14px; }
+    .floating-popup-title { margin: 0 0 6px; font-size: 1rem; font-weight: 800; }
+    .floating-popup-text { margin: 0 0 12px; color: var(--muted); font-size: 0.95rem; }
+    .floating-popup-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
     .floating-mini-btn {
-      min-height: 42px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      font-weight: 800;
-      color: var(--text);
-      background: rgba(255,255,255,0.12);
+      min-height: 42px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border);
+      text-decoration: none; font-weight: 800; color: var(--text); background: rgba(255,255,255,0.12);
     }
 
-    .floating-mini-btn.primary {
-      background: var(--primary);
-      color: white;
-      border-color: transparent;
-    }
+    .floating-mini-btn.primary { background: var(--primary); color: white; border-color: transparent; }
 
     @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-image {
-        min-height: 340px;
-        aspect-ratio: 4 / 4.5;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .car-gallery {
-        grid-template-columns: 1fr;
-      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { min-height: 340px; aspect-ratio: 4 / 4.5; }
+      .grid { grid-template-columns: 1fr; }
+      .car-gallery { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        padding: 16px;
-      }
-
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .hero,
-      .section {
-        border-radius: 22px;
-        padding: 18px;
-      }
-
+      .container { padding: 16px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero, .section { border-radius: 22px; padding: 18px; }
+      .section::before { left: 18px; }
+      .section-heading { align-items: flex-start; }
       h1 {
-        font-size: 2rem;
+        font-size: 1.60rem;
+        line-height: 1.15;
+        text-wrap: balance;
+        max-width: 100%;
       }
-
-      .cta-row,
-      .social-row {
-        flex-direction: column;
-      }
-
-      .btn,
-      .social-link {
-        width: 100%;
-      }
-
-      .carousel-track {
-        grid-auto-columns: minmax(180px, 78vw);
-      }
-
-      .floating-popup {
-        right: 12px;
-        bottom: 12px;
-        width: min(300px, calc(100vw - 24px));
-      }
+      .title-line { display: inline; }
+      .title-line + .title-line::before { content: " "; }
+      .cta-row, .social-row { flex-direction: column; }
+      .btn, .social-link { width: 100%; }
+      .carousel-track { grid-auto-columns: minmax(180px, 78vw); }
+      .floating-popup { right: 12px; bottom: 12px; width: min(300px, calc(100vw - 24px)); }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="topbar">
-      <div class="brand">Chú Tâm • Đưa đón và tham quan</div>
+      <div class="brand">Chú Tâm • Đưa đón và tham quan riêng</div>
       <button class="theme-toggle" id="themeToggle" type="button">Đổi giao diện</button>
     </div>
 
@@ -754,22 +424,22 @@
       </div>
 
       <div class="hero-copy">
-        <div class="eyebrow">Đưa đón thân thiện • Tham quan thoải mái</div>
+        <div class="eyebrow">Đưa đón thân thiện • Di chuyển riêng • Thoải mái hơn</div>
 
         <h1>
-          <span class="title-line">Đi dễ chịu hơn khi</span>
-          <span class="title-line">có chú Tâm đồng hành</span>
+          <span class="title-line">Di chuyển nhẹ nhàng hơn</span>
+          <span class="title-line">khi có chú Tâm đồng hành</span>
         </h1>
 
         <p class="lead">
-          Dịch vụ xe du lịch dành cho gia đình và nhóm nhỏ. Phù hợp với khách muốn đi riêng,
-          thoải mái và nhẹ nhàng hơn so với những tour đông người.
+          Dịch vụ xe riêng phù hợp cho gia đình và nhóm nhỏ muốn chủ động lịch trình,
+          thoải mái trong suốt hành trình và dễ trao đổi hơn so với các chuyến đi đông người.
         </p>
 
         <div class="hero-notes">
-          <div class="hero-note">Phù hợp gia đình có trẻ nhỏ</div>
-          <div class="hero-note">Đi riêng tư, không gò bó</div>
-          <div class="hero-note">Hỗ trợ khách mới dễ hơn</div>
+          <div class="hero-note">Phù hợp cho gia đình có trẻ nhỏ</div>
+          <div class="hero-note">Đi riêng tư, thoải mái, không gò bó</div>
+          <div class="hero-note">Dễ liên hệ và sắp xếp trước lịch đi</div>
         </div>
 
         <div class="cta-row">
@@ -807,51 +477,64 @@
     </section>
 
     <section class="section">
-      <h2>Dịch vụ chính</h2>
+      <div class="section-heading">
+        <div class="section-mark">I</div>
+        <h2>Dịch vụ chính</h2>
+      </div>
       <p class="desc">
-        Đi theo kiểu gọn gàng, thân thiện và thoải mái. Hợp với khách muốn chủ động thời gian hơn.
+        Hình thức phục vụ gọn gàng, thân thiện và linh hoạt, phù hợp với khách muốn chủ động thời gian
+        và ưu tiên sự thoải mái trong suốt chuyến đi.
       </p>
 
       <div class="grid">
         <div class="card">
-          <h3>Đưa đón tiện lợi</h3>
-          <p>Phù hợp cho gia đình, nhóm bạn nhỏ hoặc khách muốn di chuyển nhẹ nhàng và nhanh gọn.</p>
+          <h3>Đưa đón thuận tiện</h3>
+          <p>Phù hợp cho gia đình, nhóm bạn nhỏ hoặc khách cần di chuyển riêng với cách sắp xếp nhanh gọn và rõ ràng.</p>
         </div>
 
         <div class="card">
-          <h3>Chở khách tham quan</h3>
-          <p>Đi các điểm đẹp với lịch trình thoải mái, không quá gấp gáp và dễ sắp xếp hơn.</p>
+          <h3>Tham quan thoải mái</h3>
+          <p>Lịch trình có thể trao đổi trước để chuyến đi nhẹ nhàng hơn, không quá gấp gáp và dễ chủ động thời gian.</p>
         </div>
 
         <div class="card">
           <h3>Hỗ trợ khách mới</h3>
-          <p>Nếu lần đầu tới đây, chú Tâm có thể gợi ý lịch đi sao cho hợp thời gian và dễ chịu hơn.</p>
+          <p>Nếu lần đầu ghé địa phương, chú Tâm có thể gợi ý lịch đi phù hợp để gia đình và nhóm nhỏ cảm thấy dễ chịu hơn.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Vì sao nhiều khách thích đi cùng chú Tâm</h2>
+      <div class="section-heading">
+        <div class="section-mark">II</div>
+        <h2>Vì sao nhiều khách thích đi cùng chú Tâm</h2>
+      </div>
+      <p class="desc">
+        Sự thoải mái trong cách phục vụ và cách trao đổi rõ ràng là lý do nhiều khách cảm thấy yên tâm khi liên hệ.
+      </p>
       <div class="info-list">
         <div class="info-item">
           <strong>Thân thiện, dễ trao đổi</strong>
-          Khách đi cùng người lớn tuổi hay trẻ nhỏ đều dễ sắp xếp hơn, không bị quá vội.
+          Phù hợp với khách đi cùng người lớn tuổi, trẻ nhỏ hoặc gia đình muốn mọi thứ được sắp xếp nhẹ nhàng và dễ hiểu.
         </div>
 
         <div class="info-item">
           <strong>Đi riêng tư, thoải mái</strong>
-          Không bị cảm giác gò bó như đi tour đông người, phù hợp với gia đình hoặc nhóm nhỏ.
+          Không bị cảm giác gò bó như những chuyến đi đông người, phù hợp cho khách thích sự riêng tư và chủ động hơn.
         </div>
 
         <div class="info-item">
-          <strong>Làm theo kiểu rõ ràng, an tâm</strong>
-          Ưu tiên đúng giờ, dễ liên hệ và hỗ trợ khách theo cách nhẹ nhàng, thật thà.
+          <strong>Rõ ràng và dễ liên hệ</strong>
+          Ưu tiên đúng giờ, dễ kết nối qua điện thoại hoặc Zalo, giúp khách an tâm hơn trước khi đặt lịch.
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Hình ảnh xe thực tế</h2>
+      <div class="section-heading">
+        <div class="section-mark">III</div>
+        <h2>Hình ảnh xe thực tế</h2>
+      </div>
       <p class="desc">
         Một vài hình ảnh thực tế để khách dễ nhận xe hơn khi cần liên hệ hoặc đặt lịch.
       </p>
@@ -877,7 +560,10 @@
     <section class="section">
       <div class="gallery-header">
         <div>
-          <h2>Album kỷ niệm</h2>
+          <div class="section-heading">
+            <div class="section-mark">IV</div>
+            <h2>Album kỷ niệm</h2>
+          </div>
           <p class="desc">
             Một vài khoảnh khắc vui vẻ cùng khách trong những chuyến đi đáng nhớ.
           </p>
@@ -923,11 +609,16 @@
           <button class="carousel-btn" id="albumNext" type="button" aria-label="Xem ảnh tiếp">›</button>
         </div>
       </div>
-
     </section>
 
     <section class="section">
-      <h2>Liên hệ</h2>
+      <div class="section-heading">
+        <div class="section-mark">V</div>
+        <h2>Liên hệ</h2>
+      </div>
+      <p class="desc">
+        Nếu cần hỏi lịch đi, giá tham khảo hoặc muốn trao đổi trước, bạn có thể liên hệ trực tiếp với chú Tâm qua các kênh dưới đây.
+      </p>
       <div class="info-list">
         <div class="info-item">
           <strong>Chú Tâm</strong>
@@ -948,7 +639,7 @@
   </div>
 
   <footer>
-    Chú Tâm • Đưa đón và tham quan • Thân thiện • Gọn gàng • Dễ liên hệ
+    Chú Tâm • Đưa đón và tham quan riêng • Thân thiện • Gọn gàng • Dễ liên hệ
   </footer>
 
   <div class="lightbox" id="lightbox">
@@ -970,9 +661,9 @@
     </div>
 
     <div class="floating-popup-body">
-      <p class="floating-popup-title">Cần hỏi lịch đi hay giá trước?</p>
+      <p class="floating-popup-title">Cần hỏi lịch đi hoặc giá tham khảo?</p>
       <p class="floating-popup-text">
-        Có thể gọi, nhắn Zalo hoặc xem Facebook của chú Tâm để hỏi nhanh cho tiện.
+        Bạn có thể gọi, nhắn Zalo hoặc xem Facebook của chú Tâm để trao đổi nhanh và thuận tiện hơn.
       </p>
 
       <div class="floating-popup-actions">
@@ -1069,17 +760,11 @@
       }
 
       albumPrev.addEventListener("click", function () {
-        albumTrack.scrollBy({
-          left: -getScrollAmount(),
-          behavior: "smooth"
-        });
+        albumTrack.scrollBy({ left: -getScrollAmount(), behavior: "smooth" });
       });
 
       albumNext.addEventListener("click", function () {
-        albumTrack.scrollBy({
-          left: getScrollAmount(),
-          behavior: "smooth"
-        });
+        albumTrack.scrollBy({ left: getScrollAmount(), behavior: "smooth" });
       });
 
       const floatingPopup = document.getElementById("floatingPopup");
